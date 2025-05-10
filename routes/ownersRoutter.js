@@ -1,9 +1,27 @@
 const express = require("express")
-const router  = express.Router();
+const router = express.Router();
+const ownersModel = require("../models/owners-models")
 
-router.get("/" , function(req,res){
-res.send("hey owners router is working")
-})
+
+if (process.env.NODE_ENV = "development") {
+    router.post("/create", async function (req, res) {
+        
+        let { fullname, email, password, gstin } = req.body
+        
+        let owner = await ownersModel.find()
+        if (owner.length > 0) {
+            return res
+            .status(502)
+            .send("you have a owner ")
+        }
+     const createOwner = await ownersModel.create({
+            fullname,
+            email,
+            password,
+        })
+        res.send(createOwner)
+    })
+}
 
 
 module.exports = router
