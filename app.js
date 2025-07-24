@@ -1,4 +1,4 @@
-const express = require("express")
+express = require("express")
 const app = express()
 const cookieParser = require("cookie-parser")
 const path = require("path")
@@ -27,6 +27,12 @@ app.use(
 app.use(flash())
 app.use(express.static(path.join(__dirname , "public")))
 app.set('view engine', 'ejs');
+
+app.use((req, res, next) => {
+  res.locals.success = req.flash("success")
+  res.locals.error = req.flash("error")
+  next()
+})
 
 app.use("/" , index)
 app.use("/owners", ownersRoutter);

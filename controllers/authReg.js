@@ -47,6 +47,7 @@ if (!user){
         if (result) {
             let token = gnerateToken(user)
             res.cookie("token", token)
+            req.flash("success" , "added to cart")
             res.redirect("/shop")
         }
         else {

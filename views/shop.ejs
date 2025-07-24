@@ -1,5 +1,13 @@
 <%- include('./partials/header') %>
-<div class="w-full h-screen flex items-start px-20 py-20">
+<% if(success.length>0){ %>
+     <div class="absolute top-5 left-1/2 -translate-x-1/2 -translate-y-1/2 p-3 rounded-md bg-blue-500">
+         <span class="inline-block mt-1 mb-1 text-white">
+             <%= success %>
+         </span>
+     </div>
+     <% } %>
+<div class="w-full h-screen bg-cyan-100 flex items-start px-20 py-20">
+
   <div class="w-[25%] flex h-screen flex-col items-start">
     <div class="flex items-center gap-2">
       <h3>sort by</h3>
@@ -24,15 +32,15 @@
   <div class="w-[75%] h-full h-screen">
     <div class="flex items-start flex-wrap gap-4">
       <% product.forEach(function(product){ %>
-       <%= console.log(product) %>
-        <div class="w-60 ">
+      
+        <div class="w-60  ">
           <div
-            class="w-full h-52 flex items-center justify-center bg-[<%=product.bgcolor%>]"
+            class="w-full  h-52 rounded-t-lg flex items-center justify-center bg-[<%=product.bgcolor%>]"
           >
           <img class="h-[12rem]" src="data:image/jpeg;base64,<%= product.image.toString('base64') %>" alt="">
         </div> 
           <div
-            class="flex justify-between bg-[<%=product.panelcolor%>] items-center px-4 py-4 text-[<%=product.textcolor%>]"
+            class="rounded-b-lg flex justify-between bg-[<%=product.panelcolor%>] items-center px-4 py-4 text-[<%=product.textcolor%>]"
           >
             <div>
               <h3><%= product.name %></h3>
@@ -40,8 +48,9 @@
             </div>
             <a
               class="w-7 h-7 flex items-center justify-center rounded-full bg-white text-black"
-              href=""
+              href="/addtocart/<%= product._id %>"
             >
+            
               <i class="ri-add-line"></i>
             </a>
           </div>
